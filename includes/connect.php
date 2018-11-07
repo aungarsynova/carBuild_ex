@@ -26,7 +26,7 @@ if (!$conn) {
 //    $rows[] = $row;
 //}
 
-if (isset($_GET["carModel"])) { // check for a parametr
+if (isset($_GET["carModel"])) { // check for a parametr ?carModel=R58
     $car = $_GET["carModel"];
 
     $myQuery = "SELECT * FROM mainmodel WHERE model = '$car'";
