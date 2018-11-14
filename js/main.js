@@ -10,7 +10,45 @@
             carPricing : ""
             
         },
+
+        mounted : function(){
+            //listen to  when vue is done buikding itself
+            console.log('mounted');
+
+            this.addPreloader(document.querySelector('.modelInfo'));
+
+            //get the data for the first car
+            document.querySelector("#F55").click();
+
+        
+        },
+
+        updated: function() {
+            //listen for when Vue  completes its updte / render cycle
+            console.log('updated');
+
+            //remove the preloader after the page updates
+            let preloader = document.querySelector('.preloader-wrapper');
+
+            setTimeout(function() {
+                preloader.classList.add('hidden');
+                document.body.appendChild('.preloader');
+            }, 1000);
+        },
+ 
         methods: {
+            addPreloader(parentEl){
+                parentEl.appendChild(document.querySelector('.preloader-wrapper'));
+
+                // set up the preloader animation
+                bodymovin.loadAnimation({
+                    wrapper : document.querySelector('.preloader'),
+                    animType: 'svg',
+                    loop: true,
+                    path: './data/search.json'
+                });
+            },
+
             getData(e) {
                 //debugger;
                 let targetURL = `./includes/connect.php?carModel=${e.currentTarget.id}`;
